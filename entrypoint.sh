@@ -20,5 +20,8 @@ if [ -n "$PACKAGES" ]; then
   apk add --no-cache $PACKAGES
 fi
 
+# Change working directory
+cd "${WORK_DIR}"
+
 echo "Running container as $(id custom)"
 exec su-exec custom "${@}"
