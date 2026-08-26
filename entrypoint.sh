@@ -15,6 +15,11 @@ if [ ! "${GID}" = "${default_gid}" ] && [ -n "${GID}" ]; then
   groupmod -o -g "${GID}" custom
 fi
 
+if [ ! "${UID}" = "${default_uid}" ] || [ ! "${GID}" = "${default_gid}" ]; then
+  echo "Changing ownership of directories to '${UID}:${GID}'"
+  chown -R custom:custom "${WORK_DIR}"
+fi
+
 if [ -n "$PACKAGES" ]; then
   echo "Installing packages"
   apk add --no-cache $PACKAGES
